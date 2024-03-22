@@ -1,7 +1,7 @@
 use std::any::Any;
 
 extern "C" {
-    fn ping_provider() -> i32;
+    pub fn ping_provider() -> i32;
 }
 
 pub fn make_raw(_data: &dyn Any) -> &[u8] {
