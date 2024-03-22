@@ -1,5 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use std::any::Any;
+
+extern "C" {
+    fn ping_provider() -> i32;
+}
+
+pub fn make_raw(_data: &dyn Any) -> &[u8] {
+    return &[2 as u8];
 }
 
 #[cfg(test)]
@@ -8,7 +14,15 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let result = make_raw(&(2));
+        assert_eq!(result, &[2 as u8]);
+    }
+
+    #[test]
+    fn can_connect_to_provider() {
+        unsafe {
+            let result = ping_provider();
+            assert_eq!(result, 1);
+        }
     }
 }
