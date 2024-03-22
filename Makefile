@@ -15,14 +15,7 @@ all: $(C_LIB) $(RUST_LIB)
 
 test:
 	@echo "Running tests..."
-	# Check if "./lib" is already included in LD_LIBRARY_PATH
-	if [ -z "$${LD_LIBRARY_PATH##*./lib*}" ]; then \
-		echo "./lib is already included in LD_LIBRARY_PATH"; \
-	else \
-		export LD_LIBRARY_PATH=./lib:$$LD_LIBRARY_PATH; \
-		echo "Added ./lib to LD_LIBRARY_PATH"; \
-	fi
-	@cargo test
+	( LD_LIBRARY_PATH="./lib" cargo test )
 
 $(C_LIB): $(C_SRC) | $(LIB_DIR)
 	$(CC) -shared -o $@ $^
