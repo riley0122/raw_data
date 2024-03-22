@@ -13,7 +13,7 @@ RUST_LIB := target/debug/raw-data.a
 
 all: $(C_LIB) $(RUST_LIB)
 
-test:
+test: all
 	@echo "Running tests..."
 	( LD_LIBRARY_PATH="./lib" cargo test )
 
