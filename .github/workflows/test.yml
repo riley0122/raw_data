@@ -1,0 +1,19 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v4
+
+      - name: build c and rust project
+        run: make
+
+      - name: test rust project
+        run: make test
+      
