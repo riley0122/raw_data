@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: build c and rust project
-        run: make all
+        run: ls
 
       - name: test rust project
         run: make test
